@@ -1,22 +1,28 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 
 public class Solution {
     public static void main(String[] args) {
-        solution(new String[]{"119", "97674223", "1195524421"});
-        solution(new String[]{"123", "456", "789"});
-        solution(new String[]{"12", "123", "1235", "567", "88"});
-        solution(new String[]{"11", "1"});
-
+        solution(new String[][]{{"yellow_hat", "headgear"}, {"blue_sunglasses", "eyewear"}, {"green_turban", "headgear"}});
     }
 
-    public static boolean solution(String[] phone_book) {
-        boolean answer = true;
-        Arrays.sort(phone_book);
-        for (int i = 0; i < phone_book.length-1; i++) {
-            answer = phone_book[i + 1].startsWith(phone_book[i]);
-            if (answer) break;
+    public static int solution(String[][] clothes) {
+
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String[] clothe : clothes) {
+            map.put(clothe[1], map.getOrDefault(clothe[1], 0) + 1);
         }
-        System.out.println(!answer);
-        return !answer;
+
+        Iterator<Integer> it = map.values().iterator();
+
+        int answer = 1;
+        while(it.hasNext())
+            answer *= it.next().intValue() + 1;
+
+        // 3. 아무종류의 옷도 입지 않는 경우 제외하기
+        return answer - 1;
     }
 }
