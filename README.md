@@ -25,7 +25,7 @@ JAVA
 
 
 # 문제출처
-* 프로그래머스 (Main)
+* 프로그래머스
 * 백준
 * swea(software expert academy)
 
