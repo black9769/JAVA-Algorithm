@@ -1,28 +1,18 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class Solution {
     public static void main(String[] args) {
-        solution(new String[][]{{"yellow_hat", "headgear"}, {"blue_sunglasses", "eyewear"}, {"green_turban", "headgear"}});
+        solution(new int[]{0, 1, 2, 3, 4, 5}, new int[]{4, 1, 2});
     }
 
-    public static int solution(String[][] clothes) {
-
-        HashMap<String, Integer> map = new HashMap<>();
-        for (String[] clothe : clothes) {
-            map.put(clothe[1], map.getOrDefault(clothe[1], 0) + 1);
+    public static int[] solution(int[] arr, int[] query) {
+        for (int i = 0; i < query.length; i++) {
+            if (i % 2 == 0) arr = Arrays.copyOfRange(arr, 0, query[i] + 1);
+            else arr = Arrays.copyOfRange(arr, query[i], arr.length);
         }
-
-        Iterator<Integer> it = map.values().iterator();
-
-        int answer = 1;
-        while(it.hasNext())
-            answer *= it.next().intValue() + 1;
-
-        // 3. 아무종류의 옷도 입지 않는 경우 제외하기
-        return answer - 1;
+        System.out.println(Arrays.toString(arr));
+        return arr;
     }
+
 }
