@@ -1,18 +1,33 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
-//다이나믹 프로그래밍의 대표문제
-//2차원 배열 형식으로 테이블화로 진행
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int year = sc.nextInt();
-        int month = sc.nextInt();
-        int date = sc.nextInt();
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+        Arrays.sort(A);
+        int M = sc.nextInt();
+        for (int i = 0; i < M; i++) {
+            System.out.println(binarySearch2(A, sc.nextInt(), 0, N - 1));
+        }
+    }
 
+    static int binarySearch2(int[] A, int key, int low, int high) {
+        int mid;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (key == A[mid]) {
+                return 1;
+            } else if (key < A[mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return 0; // 탐색 실패
     }
 }
