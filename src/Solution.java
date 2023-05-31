@@ -1,18 +1,20 @@
 import java.util.*;
 
-
+// 스택 활용
+// 스택 함수
+// stack.peek -> 가장 위에 있는 값
 public class Solution {
     public static void main(String[] args) {
-        solution(new int[]{0, 1, 2, 3, 4, 5}, new int[]{4, 1, 2});
+        solution(new int[]{1,1,3,3,0,1,1});
     }
 
-    public static int[] solution(int[] arr, int[] query) {
-        for (int i = 0; i < query.length; i++) {
-            if (i % 2 == 0) arr = Arrays.copyOfRange(arr, 0, query[i] + 1);
-            else arr = Arrays.copyOfRange(arr, query[i], arr.length);
+    static  Stack<Integer> solution(int []arr) {
+        Stack<Integer> stack = new Stack<>();
+        for (int i : arr) {
+            if (stack.empty() || stack.peek() != i) stack.push(i);
         }
-        System.out.println(Arrays.toString(arr));
-        return arr;
+        System.out.println(stack);
+        return stack;
     }
 
 }
