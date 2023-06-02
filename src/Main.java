@@ -4,32 +4,20 @@ import java.io.*;
 
 public class Main
 {
-    public static void main(String args[]) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
 
-        int[] dct = new int[8];
-        for(int i = 0 ; i < dct.length ; i++ ){
-            dct[i] = Integer.parseInt(st.nextToken());
+        int result = 2;
+
+        for(int i = 0; i <N; i++){
+            result  = (int) (result + Math.pow(2, i));
         }
 
-        if(dct[0] ==1){
-            boolean result = true;
-            for(int i = 0 ; i< dct.length ; i++){
-                if(dct[i] != i+1) result = false;
-            }
-            System.out.printf("%s", result ?  "ascending": "mixed");
+        System.out.printf("%d" , result * result);
 
-        }
-        else if(dct[0] ==8){
-            boolean result = true;
-            for(int i = 0 ; i< dct.length ; i++){
-                if(dct[i]+i !=8) result = false;
-            }
-            System.out.printf("%s", result ?  "descending" :"mixed" );
-        }
 
-        else  System.out.printf("%s", "mixed");
 
     }
 }
