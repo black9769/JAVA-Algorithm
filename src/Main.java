@@ -9,6 +9,6 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
-        System.out.printf("%d", A + B);
+        System.out.printf("%d", A - B);
     }
 }
