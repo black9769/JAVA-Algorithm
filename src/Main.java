@@ -3,10 +3,14 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        for (int i = 1; i <= n; i++) {
-            System.out.printf("Hello World, Judge %d!", i);
-            System.out.println();
+        int tc = sc.nextInt();
+        for (int i = 0; i < tc; i++) {
+            int n = sc.nextInt();
+            int result = 0;
+            for (int j = 1; j <= n; j++) {
+                if (j%2 ==1) result += j;
+            }
+            System.out.println(result);
         }
     }
 }
