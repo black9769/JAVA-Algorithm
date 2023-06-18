@@ -3,11 +3,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int tc = sc.nextInt();
-        for (int i = 0; i < tc; i++) {
-            long a = sc.nextInt();
-            long b = sc.nextInt();
-            System.out.println(a + b);
-        }
+        int n1 = sc.nextInt(), k1 = sc.nextInt(), n2 = sc.nextInt(), k2 = sc.nextInt();
+        System.out.println((n1 * k1) + (n2 * k2));
     }
 }
