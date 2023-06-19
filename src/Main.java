@@ -1,17 +1,17 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int tc = Integer.parseInt(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Map<Integer, String> titleMap = new HashMap<>();
+        int tc = sc.nextInt();
         for (int i = 0; i < tc; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            long result = Long.parseLong(st.nextToken(),2);
-            System.out.println(result);
+            String title = sc.next();
+            int level = sc.nextInt();
+            titleMap.put(level, title);
         }
-
+        List<Integer> keySet = new ArrayList<>(titleMap.keySet());
+        Collections.sort(keySet);
+        System.out.println(titleMap.get(keySet.get(0)));
     }
 }
