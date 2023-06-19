@@ -1,18 +1,17 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        long a = sc.nextLong();
-        long b = sc.nextLong();
-        if(b>a) {
-            System.out.println(b-a-1);
-            for(long i = a+1; i<b; i++) System.out.print(i+" ");
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            long result = Long.parseLong(st.nextToken(),2);
+            System.out.println(result);
         }
-        else if(a>b) {
-            System.out.println(a-b-1);
-            for(long i = b+1; i<a; i++) System.out.print(i+" ");
-        }
-        else System.out.print(0);
+
     }
 }
