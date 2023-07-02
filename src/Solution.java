@@ -3,36 +3,36 @@ import java.util.*;
 //array list로 풀이 실패
 public class Solution {
     public static void main(String[] args) {
-
-        solution(new int[]{1, 2, 3, 9, 10, 12}, 7);
-        solution(new int[]{1, 2, 3, 9, 10, 12}, 100);
-        solution(new int[]{1, 1, 2, 6}, 24);
-        solution(new int[]{4, 5, 2, 4}, 1);
+        solution(3,new int[][]{{1,1,0},{1,1,0},{0,0,1}});
+        solution(3,new int[][]{{1,1,0},{1,1,0},{0,0,1}});
     }
 
 
-    static int solution(int[] scoville, int K) {
+    public static int solution(int n, int[][] computers) {
         int answer = 0;
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-        for (int i : scoville) {
-            priorityQueue.add(i);
-        }
-        int min = priorityQueue.peek();
-        while (K > min && priorityQueue.size() >1){
-            answer++;
-            int a = priorityQueue.poll();
-            int b = priorityQueue.poll();
-            int result = a + (b*2);
-            priorityQueue.add(result);
-            min = priorityQueue.peek();
+        boolean[] visited = new boolean[computers.length];
+        for (int i =0 ; i <computers.length ; i++){
+            visited[i] = false;
         }
 
-        if (K>min){
-            return -1;
+        for (int i =0 ; i< computers.length;i++){
+            if (visited[i]== false){
+                answer++;
+                dfs(i,visited,computers);
+            }
         }
-
 
         return answer;
+    }
+
+    static void dfs(int node, boolean[] visited, int[][] computer){
+        visited[node] =true;
+        for (int i = 0; i < computer.length; i++) {
+            if (visited[i] ==false && computer[node][i] ==1){
+                dfs(i,visited,computer);
+            }
+
+        }
     }
 
 
