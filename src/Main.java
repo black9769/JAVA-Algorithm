@@ -1,61 +1,28 @@
-import jdk.nashorn.internal.objects.annotations.Getter;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    private static class Human {
-        private int weight;
-        private int height;
-
-        public int getHeight() {
-            return height;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        Queue<Integer> queue = new LinkedList<>();
+        for (int n =1 ; n<= N ;n++){
+            queue.offer(n);
         }
 
-        public int getWeight() {
-            return weight;
-        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("<");
 
-        public Human(int weight, int height) {
-            this.weight = weight;
-            this.height = height;
-        }
-    }
-
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int human = Integer.parseInt(br.readLine());
-        List<Human> humanList = new ArrayList<>();
-
-        for (int i = 0; i < human; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int weight = Integer.parseInt(st.nextToken());
-            int height = Integer.parseInt(st.nextToken());
-            Human human1 = new Human(weight, height);
-            humanList.add(human1);
-        }
-
-        for (int i = 0; i < humanList.size(); i++) {
-            int weightR = humanList.get(i).getWeight();
-            int heightR = humanList.get(i).getHeight();
-            int rank = 1;
-            for (int j = 0; j < humanList.size(); j++) {
-                if (i == j) continue;
-                int weightL = humanList.get(j).getWeight();
-                int heightL = humanList.get(j).getHeight();
-
-                boolean checkWeight = weightR > weightL;
-                boolean checkHeight = heightR > heightL;
-
-                if (checkHeight && checkWeight) rank++;
+        while(queue.size() != 1) {
+            // K - 1번째까지는 처음에 있던 값을 맨 뒤로 보낸다.
+            for (int i = 0; i < K - 1; i++) {
+                queue.offer(queue.poll());
             }
-            System.out.printf("%d ", rank);
+            sb.append(queue.poll() + ", ");
         }
+
+        // Queue의 사이즈가 1일 때는 단순히 poll하면 된다.
+        sb.append(queue.poll() + ">");
+        System.out.println(sb.toString());
     }
 }
