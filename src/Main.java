@@ -1,34 +1,29 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-
-    static int[][] dp = new int[30][30];
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int TC = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int Min = Integer.MIN_VALUE;
+        int[] pack = new int[M];
+        int[] unit = new int[M];
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            pack[i] = Integer.parseInt(st.nextToken());
+            unit[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(pack);
+        Arrays.sort(unit);
 
-        for (int i = 0; i < TC; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
-            int M = Integer.parseInt(st.nextToken());
-            System.out.println(combi(M, N));
-        }
-    }
+        Min = Math.min(((N/6)+1)*pack[0], N*unit[0]);
+        Min = Math.min(Min, ((N/6))*pack[0] + (N%6)*unit[0]);
 
-    static int combi(int n, int r) {
-        // 이미 풀린 경우 바로 반환
-        if (dp[n][r] > 0) {
-            return dp[n][r];
-        }
-        // 2번 성질
-        if (n == r || r == 0) {
-            return dp[n][r] = 1;
-        }
-        // 1번 성질
-        return dp[n][r] = combi(n - 1, r - 1) + combi(n - 1, r);
+        System.out.println(Min);
     }
 }
