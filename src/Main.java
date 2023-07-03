@@ -1,21 +1,26 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String alphabet = br.readLine();
-        String s = alphabet.replace("c-", "c");
-        s = s.replace("c=", "c");
-        s = s.replace("dz=", "d");
-        s = s.replace("d-", "d");
-        s = s.replace("lj", "l");
-        s = s.replace("nj", "n");
-        s = s.replace("s=", "s");
-        s = s.replace("z=", "z");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int X = sc.nextInt();
+        int cnt = 0;
+        int floor = 0;
+        while (cnt < X) {
+            floor++;
+            cnt = floor * (floor + 1) / 2;
+        }
+        int room = X - (floor - 1) * floor / 2;
 
-        int len = s.length();
+        if (floor % 2 == 0) {
+            System.out.printf("%d/%d", room, floor - room + 1);
+            System.out.println();
+        } else {
+            System.out.printf("%d/%d", floor - room + 1, room);
+            System.out.println();
+        }
 
-        System.out.println(len);
     }
 
 }
