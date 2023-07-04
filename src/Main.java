@@ -1,26 +1,27 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int cnt = sc.nextInt();
-        int[] timeTable = new int[cnt];
-        for (int i = 0; i < cnt; i++) {
-            timeTable[i] = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int k = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int[] money = new int[k];
+        for (int i = k - 1; i >= 0; i--) {
+            st = new StringTokenizer(br.readLine());
+            money[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(timeTable);
-        int[] delay = new int[cnt];
-        int timeLatency = 0;
-        for (int i = 0; i < cnt; i++) {
-            timeLatency = timeLatency + timeTable[i];
-            delay[i] = timeLatency;
+        int cnt = 0;
+        for (int i = 0; i < k; i++) {
+            if (n >= money[i]) {
+                cnt = cnt + (n / money[i]);
+                n %= money[i];
+            }
         }
-        int res = 0;
-        for (int n : delay) {
-            res = res + n;
-        }
-        System.out.println(res);
-
+        System.out.println(cnt);
     }
 }
