@@ -4,17 +4,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int[] rope = new int[N];
-        for (int i = 0; i < rope.length; i++) {
-            rope[i] = sc.nextInt();
+        long S = sc.nextLong();
+        long N = 0;
+        long i = 0;
+        while (true) {
+            i++;
+            N = N + i;
+            if (N > S) {
+                break;
+            }
         }
-        Arrays.sort(rope);
-        int max = 0;
-        for (int i = rope.length - 1; i >= 0; i--) {
-            rope[i] = rope[i] * (N-i);
-            if (max < rope[i]) max = rope[i];
-        }
-        System.out.println(max);
+        System.out.println(i - 1);
+
+
     }
 }
