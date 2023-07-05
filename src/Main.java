@@ -1,24 +1,20 @@
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import java.util.*;
-import java.io.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[] A = new int[n];
-        int[] B = new int[n];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        StringTokenizer stk = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
-            A[i] = Integer.parseInt(st.nextToken());
-            B[i] = Integer.parseInt(stk.nextToken());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] rope = new int[N];
+        for (int i = 0; i < rope.length; i++) {
+            rope[i] = sc.nextInt();
         }
-        Arrays.sort(A);
-        Arrays.sort(B);
-        int sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum += A[i] * B[n-1-i];
+        Arrays.sort(rope);
+        int max = 0;
+        for (int i = rope.length - 1; i >= 0; i--) {
+            rope[i] = rope[i] * (N-i);
+            if (max < rope[i]) max = rope[i];
         }
-        System.out.print(sum);
+        System.out.println(max);
     }
 }
