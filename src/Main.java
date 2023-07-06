@@ -1,43 +1,32 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String N = sc.next();
-        int number = Integer.parseInt(N);
-        char[] arrN = N.toCharArray();
-        int[] num = new int[2];
-        if (number < 10) {
-            num[1] = number;
-        } else {
-            for (int i = 0; i < num.length; i++) {
-                num[i] = arrN[i] - '0';
-            }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        StringTokenizer st;
+        for (int i = 0; i < tc; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int mod = b % 4;
+            int[] arr = squareRule(a);
+            if (arr[mod] == 0) System.out.println(10);
+            else System.out.println(arr[mod]);
+
         }
-        int cnt = 0;
-        while (true) {
-            int sum;
-            if (num[0] + num[1] < 10) {
-                sum = num[0] + num[1];
-            } else {
-                sum = (num[0] + num[1]) % 10;
-            }
-            num = swap(num, sum);
-            int aa = makeInteger(num);
-            cnt++;
-            if (number == aa) break;
-        }
-        System.out.println(cnt);
     }
 
-    static int[] swap(int[] arr, int sum) {
-        arr[0] = arr[1];
-        arr[1] = sum;
+    static int[] squareRule(int a) {
+        int[] arr = new int[4];
+        arr[1] = a % 10;
+        arr[2] = arr[1] * a % 10;
+        arr[3] = arr[2] * a % 10;
+        arr[0] = arr[3] * a % 10;
         return arr;
-    }
 
-    static int makeInteger(int[] num) {
-        return num[0] * 10 + num[1];
     }
-
 }
