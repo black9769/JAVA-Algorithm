@@ -3,30 +3,26 @@ import java.util.*;
 //array list로 풀이 실패
 public class Solution {
     public static void main(String[] args) {
-        solution("110010101001");
-        solution("01110");
-        solution("1111111");
+        solution(10000);
+        solution(15);
+        solution(1);
     }
 
 
-    public static int[] solution(String s) {
-        int[] answer = new int[2];
-        int cnt = 0;
-        int count = 0;
-        while (true) {
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) - '0' == 0) {
-                    cnt++;
-                }
+    public static int solution(int n) {
+        int answer = 0;
+        for (int i = 1; i <= n; i++) {
+            int sum = i;
+            if (sum == n) {
+                answer++;
+                break;
             }
-            count++;
-            s = s.replaceAll("[^1]", "");
-            s = Integer.toBinaryString(s.length());
-            if (s.equals("1")) break;
+            for (int j = i + 1; j <= n; j++) {
+                sum += j;
+                if (sum == n) answer++;
+                else if (sum > n) break;
+            }
         }
-        answer[0] = count;
-        answer[1] = cnt;
-
         return answer;
     }
 }
