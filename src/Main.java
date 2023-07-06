@@ -1,32 +1,33 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int tc = Integer.parseInt(br.readLine());
-        StringTokenizer st;
-        for (int i = 0; i < tc; i++) {
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            int mod = b % 4;
-            int[] arr = squareRule(a);
-            if (arr[mod] == 0) System.out.println(10);
-            else System.out.println(arr[mod]);
 
+    static Integer[][] dp = new Integer[41][2];
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        dp[0][0] = 1;
+        dp[0][1] = 0;
+        dp[1][0] = 0;
+        dp[1][1] = 1;
+
+        int T = in.nextInt();
+
+        while(T-- > 0){
+            int N = in.nextInt();
+            fibonacci(N);
+            System.out.println(dp[N][0] + " " + dp[N][1]);
         }
-    }
-
-    static int[] squareRule(int a) {
-        int[] arr = new int[4];
-        arr[1] = a % 10;
-        arr[2] = arr[1] * a % 10;
-        arr[3] = arr[2] * a % 10;
-        arr[0] = arr[3] * a % 10;
-        return arr;
 
     }
+
+    static Integer[] fibonacci(int N) {
+        if(dp[N][0] == null || dp[N][1] == null) {
+            dp[N][0] = fibonacci(N - 1)[0] + fibonacci(N - 2)[0];
+            dp[N][1] = fibonacci(N - 1)[1] + fibonacci(N - 2)[1];
+        }
+        return dp[N];
+    }
+
 }
