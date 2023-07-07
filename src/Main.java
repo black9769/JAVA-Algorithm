@@ -1,33 +1,27 @@
+import java.io.BufferedReader;
 import java.util.*;
 
 public class Main {
 
-    static Integer[][] dp = new Integer[41][2];
-
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        dp[0][0] = 1;
-        dp[0][1] = 0;
-        dp[1][0] = 0;
-        dp[1][1] = 1;
-
-        int T = in.nextInt();
-
-        while(T-- > 0){
-            int N = in.nextInt();
-            fibonacci(N);
-            System.out.println(dp[N][0] + " " + dp[N][1]);
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String[] strArr = new String[N];
+        for (int i = 0; i < N; i++) {
+            String str = sc.next();
+            strArr[i] = str;
         }
+        String[] resultArr = Arrays.stream(strArr).distinct().toArray(String[]::new);
+        Arrays.sort(resultArr, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                if (s1.length() == s2.length()) return s1.compareTo(s2);
+                else return s1.length() - s2.length();
+            }
+        });
 
-    }
-
-    static Integer[] fibonacci(int N) {
-        if(dp[N][0] == null || dp[N][1] == null) {
-            dp[N][0] = fibonacci(N - 1)[0] + fibonacci(N - 2)[0];
-            dp[N][1] = fibonacci(N - 1)[1] + fibonacci(N - 2)[1];
+        for (String str : resultArr){
+            System.out.println(str);
         }
-        return dp[N];
     }
-
 }
