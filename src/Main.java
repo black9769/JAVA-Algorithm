@@ -1,30 +1,33 @@
-import java.util.Scanner;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in);
-
-        int N = in.nextInt();
-
-        int[][] arr = new int[N][2];
-
-        for(int i = 0; i < N; i++) {
-            arr[i][0] = in.nextInt();
-            arr[i][1] = in.nextInt();
-        }
-
-        Arrays.sort(arr, (e1, e2) -> {
-            if(e1[0] == e2[0]) {
-                return e1[1] - e2[1];
-            } else {
-                return e1[0] - e2[0];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        StringTokenizer st;
+        for (int t = 0; t < tc; t++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int b = Integer.parseInt(st.nextToken());
+            int[] ho = new int[b];
+            int[] dp = new int[b];
+            for (int i = 1; i <= b; i++) {
+                ho[i - 1] = i;
             }
-        });
-
-        for(int i = 0; i < N; i++) {
-            System.out.println(arr[i][0] + " " + arr[i][1]);
+            while (a-- > 0) {
+                dp[0] = 1;
+                for (int i = 1; i < dp.length; i++) {
+                    dp[i] = dp[i - 1] + ho[i];
+                    ho[i] =dp[i];
+                }
+            }
+            System.out.println(dp[b - 1]);
         }
+
+
     }
 }
