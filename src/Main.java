@@ -5,25 +5,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] height = new int[9];
-        int sum = 0; //9명의 키의 총합을 구한다
-        for (int i = 0; i < height.length; i++) {
-            height[i] = sc.nextInt();
-            sum += height[i];
+        int n = sc.nextInt();//시험장수
+        long[] arr = new long[n];//시험장
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();//시험장 총원
         }
-        for (int i = 0; i < 8; i++) { //첫번째 인덱스를 고정
-            for (int j = i + 1; j < 9; j++) { //그 다음 인덱스 부터 진행하면서
-                if (sum - height[i] - height[j] == 100) { //키의 총합에서 첫번째 인덱스와 다음으로 진행되는 인덱스 값의 차가 100일때
-                    height[i] = 0; // 정렬해서 앞서 두개를 제외시키기 위해  -> 오름차순 정렬 Skill
-                    height[j] = 0;
-                    Arrays.sort(height);
-                    for (int k = 2; k < 9; k++) {
-                        System.out.println(height[k]);
-                    }
-                    return;
-                }
-            }
+        int b = sc.nextInt(); //총감독이 감독할 수있는 인원수
+        int c = sc.nextInt(); //서브감독이 감독할 수 있는 인원수
+        long total = 0;
+        for (int i = 0; i < n; i++) {
+            arr[i] = arr[i] - b;//총감독이 감독하고 남은 인원수
         }
-
+        total += n;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] <= 0) continue;
+            long num =  (long)Math.ceil((double) arr[i] / (double)c);
+            total += num;
+        }
+        System.out.println(total);
     }
 }
