@@ -38,8 +38,6 @@ public class Solution {
             long max = Math.max(dp1[i], dp2[i]);
             answer = Math.max(answer, max);
         }
-
-
         return answer;
     }
 
