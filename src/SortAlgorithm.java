@@ -9,16 +9,26 @@ public class SortAlgorithm {
     }
 
     private static void sortBubble(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            System.out.printf("%d 라운드 ", i);
-            System.out.printf("%d 비교 횟수", arr.length - i);
-            System.out.println();
-            for (int j = 0; j < arr.length - 1; j++) {
-                if (arr[i] < arr[j]) {
-                    swap(i, j);
+        boolean isSwap; //교환 여부
+        do {
+            isSwap = false;
+            for (int i = 0; i < arr.length - 2; i++) { //시작부터 순회
+                if (arr[i] > arr[i + 1]) {
+                    swap(i, i + 1);
+                    isSwap = true; //교환 발생
                 }
             }
-        }
+            if (!isSwap) {
+                break;
+            }
+            isSwap = false;
+            for (int i = arr.length - 2; i >= 0; i--) { //끝부터 순회
+                if (arr[i] > arr[i + 1]) {
+                    swap(i, i + 1);
+                    isSwap = true;
+                }
+            }
+        } while (isSwap);
     }
 
     private static void swap(int i, int j) {
